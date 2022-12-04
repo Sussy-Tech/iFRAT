@@ -131,15 +131,39 @@ public static class Execute
     /// <returns>The commands' MetaData.</returns>
     public static SlashCommandProperties Build()
     {
+        SlashCommandOptionBuilder useBash = new()
+        {
+            Name = "usebash",
+            Description = "States wether or not the bot should run this command using the Bash script interpreter",
+            Type = ApplicationCommandOptionType.Boolean,
+            IsRequired = true
+        };
+        SlashCommandOptionBuilder executable = new()
+        {
+            Name = "executable",
+            Description = "The path to the executable used to perform the operation",
+            Type = ApplicationCommandOptionType.String,
+            IsRequired = true
+        };
+        SlashCommandOptionBuilder arguments = new()
+        {
+            Name = "arguments",
+            Description = "The arguments given to the executable to do it's job",
+            Type = ApplicationCommandOptionType.String,
+            IsRequired = true
+        };
+        SlashCommandOptionBuilder sudoRequired = new()
+        {
+            Name = "sudorequired",
+            Description = "Does the command require elevation?",
+            Type = ApplicationCommandOptionType.Boolean
+            IsRequired = true
+        };
         var cmdBuild = new SlashCommandBuilder
         {
             Name = "exec",
             Description = "Executes a command remotely on the discord bot server.",
-        };
-        cmdBuild.AddOption("usebash", ApplicationCommandOptionType.Boolean, "States wether or not the bot should run this command using the Bash script interpreter", true, false);
-        cmdBuild.AddOption("executable", ApplicationCommandOptionType.String, "The path to the executable used to perform the operation", true, false);
-        cmdBuild.AddOption("arguments", ApplicationCommandOptionType.String, "The arguments given to the executable to do it's job", true, false);
-        cmdBuild.AddOption("sudorequired", ApplicationCommandOptionType.Boolean, "Does the command require sudo?", true, false);
+        }.AddOptions(useBash, executable, arguments, sudoRequired);
 
         return cmdBuild.Build();
     }
