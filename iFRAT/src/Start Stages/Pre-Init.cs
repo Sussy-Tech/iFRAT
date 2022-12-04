@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Discord;
+using Discord.Commands.Builders;
 using Discord.Interactions;
 using Masked.DiscordNet;
 using Masked.Sys.Extensions;
@@ -10,7 +11,7 @@ namespace iFRAT;
 
 public partial class StartStage
 {
-    public async Task<CommandHelper> PreInitialization(string[] arguments)
+    public async Task<PreInit> PreInitialization(string[] arguments)
     {
         // Set Ctrl + C/Break Handler.
 
@@ -19,7 +20,11 @@ public partial class StartStage
         AnsiConsole.MarkupLine("[maroon][[INFO]] Running [red]Pre-Initialization[/].[/]");
 
         // Setup commands.
-        return iFRAT.Commands.CommandLoader.LoadCommands(new());
+        CommandHelper commandContext = iFRAT.Commands.CommandLoader.LoadCommands(new());
+
+        string token = File.ReadAllText("./TOKEN");
+
+        return new(commandContext, token);
     }
 
     private static void ConsoleExit(object? sender, ConsoleCancelEventArgs args)

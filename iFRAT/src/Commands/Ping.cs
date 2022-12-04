@@ -11,8 +11,9 @@ namespace iFRAT.Commands;
 /// <summary>
 /// The Ping Command, Guaranteed to always work, else, Discord Bots are doomed..
 /// </summary>
-public static class Ping
+public class Ping : Masked.DiscordNet.IDiscordCommand
 {
+    public static Ping GlobalInstance { get; } = new();
     //! The perfect command.
 
     /// <summary>
@@ -20,13 +21,13 @@ public static class Ping
     /// </summary>
     /// <param name="sockCommand">The interaction socket.</param>
     /// <returns>A Task representing the on-going asynchronous operation</returns>
-    public static async Task Run(SocketSlashCommand sockCommand)
+    public async Task Run(SocketSlashCommand sockCommand)
     {
         await sockCommand.DeferAsync();
         await sockCommand.FollowupAsync($"**Pong**!\nThe ping between the **__Discord Gateway__** and the **__Bot__** is of {Shared.DiscordClient.Latency}ms!");
     }
 
-    public static SlashCommandProperties Build()
+    public SlashCommandProperties Build()
     {
         return new SlashCommandBuilder
         {

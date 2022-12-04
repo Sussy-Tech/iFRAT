@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Security;
 using Discord;
 using Discord.Interactions;
 using Discord.WebSocket;
@@ -11,17 +12,15 @@ namespace iFRAT;
 
 public partial class StartStage
 {
-    private readonly string token = File.ReadAllText("./TOKEN");
-    public async Task Initialization(CommandHelper commandHelper)
+    public async Task Initialization(PreInit preInitialization)
     {
         AnsiConsole.MarkupLine("[maroon][[Init/INFO]] Running [green]Initialization[/].[/]");
-
         // Register listeners to events.
 
         AnsiConsole.MarkupLine("[maroon][[Init/INFO]] [yellow italic bold]Registering event listeners[/]...[/]");
 
         // Load commands.
-        Shared.DiscordClient.SlashCommandExecuted += commandHelper.GetSlashCommandHandler();
+        Shared.DiscordClient.SlashCommandExecuted += preInitialization.GetCommands().GetSlashCommandHandler();
         AnsiConsole.MarkupLine("[maroon][[Init/INFO]] [yellow italic bold]Registered listener for event [red bold underline]SlashCommandExecuted[/][/]...[/]");
 
         Shared.DiscordClient.Log += log =>
@@ -34,7 +33,7 @@ public partial class StartStage
         AnsiConsole.MarkupLine("[maroon][[Init/INFO]] [yellow italic bold]Logging in[/] with [red bold underline]token[/]...[/]");
 
         // Start Bot
-        await Shared.DiscordClient.LoginAsync(TokenType.Bot, token: token, validateToken: true)
+        await Shared.DiscordClient.LoginAsync(TokenType.Bot, token: preInitialization.ReadToken(), validateToken: true)
         .ContinueWith(async x =>
         {
             await x; // await previous task
@@ -72,7 +71,7 @@ public partial class StartStage
                 }
 
                 AnsiConsole.MarkupLine("[maroon][[Init/INFO]] [yellow italic bold]Warming up Commands[/]...[/]");
-                await commandHelper.SubmitCommandBuilder(guild);
+                await preInitialization.GetCommands().SubmitCommandBuilder(guild);
             };
         });
     }

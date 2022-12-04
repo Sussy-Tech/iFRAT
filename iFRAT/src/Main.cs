@@ -16,13 +16,13 @@ public static class MainActivity
         //! |     Pre-Init Code.      |     |
         //! |-------------------------|     V
 
-        CommandHelper commandConstructor = await programStages.PreInitialization(args);
+        PreInit preInitialization = await programStages.PreInitialization(args);
 
         //! |-------------------------|
         //! |       Init Code.        |     |
         //! |-------------------------|     V
 
-        await programStages.Initialization(commandConstructor);
+        await programStages.Initialization(preInitialization);
 
         //! |-------------------------|
         //! |     Post-Init Code.     |     |

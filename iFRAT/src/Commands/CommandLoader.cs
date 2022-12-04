@@ -7,9 +7,9 @@ public static class CommandLoader
 {
     public static CommandHelper LoadCommands(CommandHelper commandHelper)
     {
-        commandHelper.AddToCommandList(Ping.Build(), async f => await Ping.Run(f));
+        commandHelper.AddToCommandList(Ping.GlobalInstance);
 
-        // commandHelper.AddToCommandList(Commands.BuildCommandRunner(), async f => await Commands.CommandRunner(f));
+        commandHelper.AddToCommandList(Execute.GlobalInstance);
 
         return commandHelper;
     }
