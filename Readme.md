@@ -18,5 +18,5 @@ Tools Used:
 
 `*`: ***Check your hands before assuming this is true***
 
-> **Note**
+> **Note**<br>
 This software does not have any purpose in harming other people, this software was built with the purpose of controlling a computer remotely, **WITH CONSENT**.
