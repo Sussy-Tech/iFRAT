@@ -156,7 +156,11 @@ public static class Execute
         {
             Name = "sudorequired",
             Description = "Does the command require elevation?",
+<<<<<<< HEAD
             Type = ApplicationCommandOptionType.Boolean,
+=======
+            Type = ApplicationCommandOptionType.Boolean
+>>>>>>> 753ad6052818bb463146716c8725b12966cf940d
             IsRequired = true
         };
         var cmdBuild = new SlashCommandBuilder
