@@ -3,6 +3,9 @@
 The most revolutionary Remote Access Tool out there is here at your door.
 
 > **Note**<br>
+> Project Status: **Meme** -> Not ready, not even alpha build.
+
+> **Note**<br>
 > This is ofc not a revolutionary tool, it's just a generic software.
 
 Tools Used:
