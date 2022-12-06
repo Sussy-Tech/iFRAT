@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using System.Security;
 using Discord;
 using Discord.Interactions;
 using Discord.WebSocket;
@@ -10,7 +9,7 @@ using Spectre.Console;
 
 namespace iFRAT;
 
-public partial class StartStage
+public sealed partial class StartStage
 {
     public async Task Initialization(PreInit preInitialization)
     {

@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using Discord;
-using Discord.Commands.Builders;
 using Discord.Interactions;
 using Masked.DiscordNet;
 using Masked.Sys.Extensions;
@@ -9,7 +8,7 @@ using Spectre.Console;
 
 namespace iFRAT;
 
-public partial class StartStage
+public sealed partial class StartStage
 {
     public async Task<PreInit> PreInitialization(string[] arguments)
     {

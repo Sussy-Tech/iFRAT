@@ -11,7 +11,7 @@ namespace iFRAT.Commands;
 /// <summary>
 /// The Ping Command, Guaranteed to always work, else, Discord Bots are doomed..
 /// </summary>
-public class Ping : Masked.DiscordNet.IDiscordCommand
+public sealed class Ping : Masked.DiscordNet.IDiscordCommand
 {
     public static Ping GlobalInstance { get; } = new();
     //! The perfect command.

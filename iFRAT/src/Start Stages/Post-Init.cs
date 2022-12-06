@@ -6,7 +6,7 @@ using Spectre.Console;
 
 namespace iFRAT;
 
-public partial class StartStage
+public sealed partial class StartStage
 {
     public async Task PostInitialization()
     {
