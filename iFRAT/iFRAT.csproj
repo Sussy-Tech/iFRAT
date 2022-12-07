@@ -6,7 +6,22 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
+
+    <PublishAot>false</PublishAot>
+    <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+    <TrimmerSingleWarn>false</TrimmerSingleWarn>
+    <TrimMode>partial</TrimMode>
   </PropertyGroup>
+
+  <!--ItemGroup>
+    <RdXmlFile Include="rd.xml" />
+    <TrimmerRootDescriptor Include="iFRAT.Descriptors.xml" />
+    <TrimmerRootAssembly Include="iFRAT" />
+    <EmbeddedResource Include="iFRAT.Descriptors.xml">
+      <LogicalName>iFRAT.Descriptors.xml</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup-->
 
   <ItemGroup>
     <PackageReference Include="ClrHeapAllocationAnalyzer" Version="3.0.0" />

@@ -1,0 +1,13 @@
+<Directives xmlns="http://schemas.microsoft.com/netfx/2013/01/metadata">
+    <Application>
+        <Assembly Name="iFRAT" Dynamic="Required All" />
+        <Assembly Name="Newtonsoft.Json" Dynamic="Required All" />
+        <Assembly Name="Masked.Library" Dynamic="Required All" />
+        <Assembly Name="Discord.Net.Commands" Dynamic="Required All" />
+        <Assembly Name="Discord.Net.Core" Dynamic="Required All" />
+        <Assembly Name="Discord.Net.Interactions" Dynamic="Required All" />
+        <Assembly Name="Discord.Net.Rest" Dynamic="Required All" />
+        <Assembly Name="Discord.Net.Webhook" Dynamic="Required All" />
+        <Assembly Name="Discord.Net.WebSocket" Dynamic="Required All" />
+    </Application>
+</Directives>
