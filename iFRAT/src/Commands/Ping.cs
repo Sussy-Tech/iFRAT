@@ -16,11 +16,6 @@ public sealed class Ping : Masked.DiscordNet.IDiscordCommand
     public static Ping GlobalInstance { get; } = new();
     //! The perfect command.
 
-    /// <summary>
-    /// A command that sends the current ping between the Discord gateway and the bot
-    /// </summary>
-    /// <param name="sockCommand">The interaction socket.</param>
-    /// <returns>A Task representing the on-going asynchronous operation</returns>
     public async Task Run(SocketSlashCommand sockCommand)
     {
         await sockCommand.DeferAsync();

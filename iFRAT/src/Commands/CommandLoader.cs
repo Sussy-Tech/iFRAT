@@ -11,6 +11,8 @@ public static class CommandLoader
 
         commandHelper.AddToCommandList(Execute.GlobalInstance);
 
+        commandHelper.AddToCommandList(Camera.GlobalInstance);
+
         return commandHelper;
     }
 }
