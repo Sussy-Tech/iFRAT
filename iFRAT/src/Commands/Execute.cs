@@ -23,5 +23,4 @@ public sealed class Execute : IDiscordCommand
     {
         throw new NotImplementedException();
     }
-
 }

@@ -5,7 +5,7 @@ using System.Text;
 namespace iFRAT.Extras.Password;
 public sealed partial class DecryptionAPI
 {
-    public enum KeyType { UserKey = 1, MachineKey };
+    public enum KeyType { UserKey = 1, MachineKey }
 
     private const KeyType defaultKeyType = KeyType.UserKey;
     static private readonly IntPtr NullPtr = ((IntPtr)((int)(0)));
