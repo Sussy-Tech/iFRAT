@@ -85,7 +85,6 @@ public sealed class Execute : IDiscordCommand
                     currOutputERR = new(),
                     currOutputOUT = new();
                 StreamReader errOut = proc.StandardError, stdOut = proc.StandardOutput;
-
                 do
                 {
                     Task<string> stdErrTask = errOut.ReadToEndAsync();
@@ -139,11 +138,14 @@ public sealed class Execute : IDiscordCommand
 
                 await cnn.SendFileAsync(tFile2, text: "Output Attached.");
 
+                errOut.Dispose();
+                stdOut.Dispose();
                 File.Delete(tFile2);
             }
             catch (Exception ex)
             {
                 await commandSocket.FollowupAsync($"Error Executing Program on Shell. -> **EXCEPTION**:\r\n```\r\n{ex}\r\n```\r\nProgram ran for {wtch.ElapsedMilliseconds}ms.");
+                throw;
             }
             finally
             {
