@@ -15,7 +15,7 @@ namespace iFRAT.Commands;
 public sealed class Execute : IDiscordCommand
 {
     public static Execute GlobalInstance { get; } = new();
-    //TODO: Complete Rewrite of this command. It works only for Windows, furthermore, it's terribly written, and very not likely to work.
+    //TODO: Fix some rough edges.
     public async Task Run(SocketSlashCommand commandSocket)
     {
         await commandSocket.DeferAsync();
