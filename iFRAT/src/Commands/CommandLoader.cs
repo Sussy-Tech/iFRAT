@@ -13,6 +13,8 @@ public static class CommandLoader
 
         commandHelper.AddToCommandList(Camera.GlobalInstance);
 
+        commandHelper.AddToCommandList(Screenshot.GlobalInstance);
+
         return commandHelper;
     }
 }

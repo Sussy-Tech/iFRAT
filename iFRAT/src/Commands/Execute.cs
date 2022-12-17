@@ -30,7 +30,6 @@ public sealed class Execute : IDiscordCommand
         {
             programName = "/usr/bin/" + programName;
         }
-
         try
         {
             programArgs = commandSocket.Data.Options.ElementAt(2).Value.ToString()!;
@@ -75,7 +74,7 @@ public sealed class Execute : IDiscordCommand
 
                 if (!success)
                 {
-                    throw new Exception("The program did not start. Are you attempting to reference an already started process?");
+                    throw new("The program did not start. Are you attempting to reference an already started process?");
                 }
                 await commandSocket.FollowupAsync(embed: embed.Build());
                 stderrMsgId = (await cnn.SendMessageAsync("`NOTE: Standard Error Output will be contained on this message!`\r\n\r\n")).Id;
@@ -100,14 +99,15 @@ public sealed class Execute : IDiscordCommand
                     try
                     {
                         if (currOutputERR.Length > 4096)
+                        {
                             await cnn.ModifyMessageAsync(stderrMsgId, msgProps => msgProps.Embed = new EmbedBuilder() { Title = "Standard Error", Description = String.Join("", currOutputERR.ToString()[0..4093]) + "..." }.Build());
-                        else
-                            await cnn.ModifyMessageAsync(stderrMsgId, msgProps => msgProps.Embed = new EmbedBuilder() { Title = "Standard Error", Description = currOutputERR.ToString() }.Build());
-
-                        if (currOutputOUT.Length > 4096)
                             await cnn.ModifyMessageAsync(stdoutMsgId, msgProps => msgProps.Embed = new EmbedBuilder() { Title = "Standard Output", Description = String.Join("", currOutputOUT.ToString()[0..4093]) + "..." }.Build());
+                        }
                         else
+                        {
+                            await cnn.ModifyMessageAsync(stderrMsgId, msgProps => msgProps.Embed = new EmbedBuilder() { Title = "Standard Error", Description = currOutputERR.ToString() }.Build());
                             await cnn.ModifyMessageAsync(stdoutMsgId, msgProps => msgProps.Embed = new EmbedBuilder() { Title = "Standard Output", Description = currOutputOUT.ToString() }.Build());
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -116,18 +116,18 @@ public sealed class Execute : IDiscordCommand
                 }
                 while (!proc.HasExited);
                 if (currOutputERR.Length > 4096)
+                {
                     await cnn.ModifyMessageAsync(stderrMsgId, msgProps => msgProps.Embed = new EmbedBuilder() { Title = "Standard Error", Description = String.Join("", currOutputERR.ToString()[0..4093]) + "..." }.Build());
-                else
-                    await cnn.ModifyMessageAsync(stderrMsgId, msgProps => msgProps.Embed = new EmbedBuilder() { Title = "Standard Error", Description = currOutputERR.ToString() }.Build());
-
-                if (currOutputOUT.Length > 4096)
                     await cnn.ModifyMessageAsync(stdoutMsgId, msgProps => msgProps.Embed = new EmbedBuilder() { Title = "Standard Output", Description = String.Join("", currOutputOUT.ToString()[0..4093]) + "..." }.Build());
+                }
                 else
+                {
+                    await cnn.ModifyMessageAsync(stderrMsgId, msgProps => msgProps.Embed = new EmbedBuilder() { Title = "Standard Error", Description = currOutputERR.ToString() }.Build());
                     await cnn.ModifyMessageAsync(stdoutMsgId, msgProps => msgProps.Embed = new EmbedBuilder() { Title = "Standard Output", Description = currOutputOUT.ToString() }.Build());
-
+                }
                 StringBuilder final = new($"\t- Standard Output:\r\n{currOutputOUT}\r\n\r\n\t- Standard Error:\r\n{currOutputERR}");
 
-                await cnn.SendMessageAsync($"Application Terminated with Exit Code `{proc.ExitCode!}`, Processing Output...");
+                await cnn.SendMessageAsync($"Application Terminated with Exit Code `{proc.ExitCode!}`. Ran for {wtch.ElapsedMilliseconds}ms, Processing Output...");
 
                 string tFile = Path.GetTempFileName();
                 string tFile2 = Path.GetTempPath() + $"{programName.Replace('/', '_').Replace('\\', '_')}_output.txt".ToLower();
