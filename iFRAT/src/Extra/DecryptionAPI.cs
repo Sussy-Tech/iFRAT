@@ -3,14 +3,17 @@ using System.Runtime.InteropServices;
 using System.Text;
 
 namespace iFRAT.Extras.Password;
+
 public sealed partial class DecryptionAPI
 {
-    public enum KeyType { UserKey = 1, MachineKey }
+    public enum KeyType
+    { UserKey = 1, MachineKey }
 
     private const KeyType defaultKeyType = KeyType.UserKey;
-    static private readonly IntPtr NullPtr = ((IntPtr)((int)(0)));
+    private static readonly IntPtr NullPtr = ((IntPtr) ((int) (0)));
     private const int CRYPTPROTECT_UI_FORBIDDEN = 0x1;
     private const int CRYPTPROTECT_LOCAL_MACHINE = 0x4;
+
     internal partial class Unmanaged
     {
         [DllImport("crypt32.dll", SetLastError = true, CharSet = CharSet.Auto)]
@@ -55,6 +58,7 @@ public sealed partial class DecryptionAPI
         ps.hwndApp = NullPtr;
         ps.szPrompt = null;
     }
+
     private static void InitBLOB(byte[] data, ref Unmanaged.DATA_BLOB blob)
     {
         // Use empty array for null parameter.
@@ -104,6 +108,7 @@ public sealed partial class DecryptionAPI
                         Encoding.UTF8.GetBytes(entropy),
                         description));
     }
+
     public static byte[] Encrypt(KeyType keyType, byte[] plainTextBytes, byte[] entropyBytes, string description)
     {
         // Make sure that parameters are valid.
@@ -193,6 +198,7 @@ public sealed partial class DecryptionAPI
             entropyBlob.Dispose();
         }
     }
+
     public static string Decrypt(string cipherText)
     {
         string description;
@@ -208,7 +214,8 @@ public sealed partial class DecryptionAPI
     public static string Decrypt(string cipherText, string entropy, out string description)
     {
         // Make sure that parameters are valid.
-        if (entropy == null) entropy = String.Empty;
+        if (entropy == null)
+            entropy = String.Empty;
 
         return Encoding.UTF8.GetString(
                     Decrypt(Convert.FromBase64String(cipherText),

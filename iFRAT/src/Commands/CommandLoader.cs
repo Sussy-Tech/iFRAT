@@ -1,4 +1,3 @@
-using Discord;
 using Masked.DiscordNet;
 
 namespace iFRAT.Commands;

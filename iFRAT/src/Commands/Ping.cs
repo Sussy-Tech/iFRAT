@@ -1,13 +1,10 @@
 using Discord;
-using Discord.Interactions;
-using Discord.Rest;
 using Discord.WebSocket;
-using Masked.DiscordNet.Extensions;
-using Spectre.Console;
 
 namespace iFRAT.Commands;
 
 #pragma warning disable MA0004 // Disable -> Use ConfigurateAwait(false); as no SyncCtx is needed.
+
 /// <summary>
 /// The Ping Command, Guaranteed to always work, else, Discord Bots are doomed..
 /// </summary>

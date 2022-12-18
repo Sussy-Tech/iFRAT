@@ -1,6 +1,7 @@
 using static Emgu.CV.VideoCapture;
 
 namespace iFRAT.Extensions;
+
 public static class EXTENDED_CMT
 {
     /// <summary>

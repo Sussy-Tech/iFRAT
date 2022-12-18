@@ -1,10 +1,4 @@
-﻿using System;
-using System.Linq;
-using Masked.DiscordNet;
-using Masked.Sys.Extensions;
-using Spectre.Console;
-
-namespace iFRAT;
+﻿namespace iFRAT;
 
 public static class MainActivity
 {

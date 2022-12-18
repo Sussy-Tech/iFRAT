@@ -1,7 +1,6 @@
-using System;
 using System.Net;
-using System.Net.Http;
 using System.Security.Authentication;
+
 using Discord;
 using Discord.WebSocket;
 
@@ -29,6 +28,7 @@ public static class Shared
         // Small cache.
         MessageCacheSize = 15,
     });
+
     /// <summary>
     /// HTTPClient used to make any type of HTTP requests.
     /// </summary>
@@ -40,10 +40,12 @@ public static class Shared
         AutomaticDecompression = DecompressionMethods.All,
         AllowAutoRedirect = true,
     });
+
     /// <summary>
     /// Determines if the program is set to 'testing mode'
     /// </summary>
     public static bool TestingMode { get; private set; } = false;
+
     /// <summary>
     /// Inverse the state of TestingMode,
     /// if TestingMode is true it will become false,

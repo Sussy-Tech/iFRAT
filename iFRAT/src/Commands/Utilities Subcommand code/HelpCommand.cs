@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Discord;
+﻿using Discord;
 
 using Masked.DiscordNet.Extensions;
 
 namespace iFRAT.Extra.Commands;
+
 public class HelpCommand
 {
-    public static Embed GetHelpOfCommand(string subCommandName) {
+    public static Embed GetHelpOfCommand(string subCommandName)
+    {
         EmbedBuilder builder = new();
         builder.SetRandomColor();
 
@@ -29,7 +25,7 @@ public class HelpCommand
             case "dir":
                 builder.Title = "dir => List Directory";
                 builder.Description =
-                    "This command is used to list the contents of the current directory of the bot." + 
+                    "This command is used to list the contents of the current directory of the bot." +
                     "\nSyntax: **/utils dir**" +
                     "\n**dir** -> This value corresponds to the ´subcommand´ argument";
                 break;

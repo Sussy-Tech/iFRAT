@@ -1,20 +1,20 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
+
 using Discord;
-using Discord.Interactions;
-using Discord.Rest;
 using Discord.WebSocket;
+
 using Masked.DiscordNet;
-using Masked.DiscordNet.Extensions;
-using Spectre.Console;
 
 namespace iFRAT.Commands;
 
 #pragma warning disable MA0004 // Disable -> Use ConfigurateAwait(false); as no SyncCtx is needed.
+
 public sealed class Execute : IDiscordCommand
 {
     public static Execute GlobalInstance { get; } = new();
+
     //TODO: Fix some rough edges.
     public async Task Run(SocketSlashCommand commandSocket)
     {
@@ -38,6 +38,7 @@ public sealed class Execute : IDiscordCommand
         {
             programArgs = "";
         }
+
         #endregion Program Args + Info
 
         EmbedBuilder embed = new()
@@ -157,6 +158,7 @@ public sealed class Execute : IDiscordCommand
         };
         watcher.Start();
     }
+
     public SlashCommandProperties Build()
     {
         SlashCommandBuilder cmd = new()

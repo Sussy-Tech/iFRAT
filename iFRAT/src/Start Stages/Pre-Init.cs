@@ -1,9 +1,5 @@
-using System;
-using System.Linq;
-using Discord;
-using Discord.Interactions;
 using Masked.DiscordNet;
-using Masked.Sys.Extensions;
+
 using Spectre.Console;
 
 namespace iFRAT;

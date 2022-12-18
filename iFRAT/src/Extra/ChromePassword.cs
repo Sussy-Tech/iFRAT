@@ -66,6 +66,7 @@ public struct PasswordContainer
 {
     private readonly List<String> Passwords;
     public readonly int passwordCount;
+
     /// <summary>
     /// Init a PasswordContainer data structure.
     /// </summary>
@@ -80,6 +81,7 @@ public struct PasswordContainer
     {
         Passwords.Add(pass);
     }
+
     public void RemovePassword(string pass)
     {
         Passwords.Remove(pass);

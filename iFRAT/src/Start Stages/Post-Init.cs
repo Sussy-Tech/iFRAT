@@ -1,10 +1,7 @@
-using System;
-using System.Linq;
 using Discord;
 
 using iFRAT.Commands;
 
-using Masked.Sys.Extensions;
 using Spectre.Console;
 
 namespace iFRAT;
@@ -17,8 +14,10 @@ public sealed partial class StartStage
 
         AnsiConsole.MarkupLine("[yellow][[INFO/PostInit]] Registering [grey underline]autocomplete[/] for command [red bold]utils[/] for parameter with name [red bold underline]subcommand[/][/]");
 
-        Shared.DiscordClient.AutocompleteExecuted += async autoCompleteHandler => {
-#region Execution Guards
+        Shared.DiscordClient.AutocompleteExecuted += async autoCompleteHandler =>
+        {
+            #region Execution Guards
+
             if (autoCompleteHandler.IsDMInteraction)
                 return;
 
@@ -30,6 +29,7 @@ public sealed partial class StartStage
 
             if (autoCompleteHandler.Data.Current.Name != "subcommand")
                 return;
+
             #endregion Execution Guards
 
             // Defer Interaction in case we time out a bit
@@ -40,7 +40,8 @@ public sealed partial class StartStage
 
             for (int i = 0; i < autoCompletePossibilities.Count; i++)
             {
-                autoCompletePossibilities.Add(new() { 
+                autoCompletePossibilities.Add(new()
+                {
                     Name = subCommands.ElementAt(i).Key,
                     Value = subCommands.ElementAt(i).Value
                 });

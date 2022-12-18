@@ -1,10 +1,6 @@
-using System;
-using System.Linq;
 using Discord;
-using Discord.Interactions;
 using Discord.WebSocket;
-using Masked.DiscordNet;
-using Masked.Sys.Extensions;
+
 using Spectre.Console;
 
 namespace iFRAT;

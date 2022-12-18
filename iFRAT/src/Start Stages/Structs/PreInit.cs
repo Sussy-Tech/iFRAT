@@ -1,6 +1,7 @@
 using Masked.DiscordNet;
 
 namespace iFRAT;
+
 public struct PreInit
 {
     private readonly CommandHelper _commands;
@@ -11,6 +12,7 @@ public struct PreInit
         _commands = commandHelper;
         _token = token;
     }
+
     /// <summary>
     /// Obtains a copy from the command builder issued by Masked Library
     /// </summary>
