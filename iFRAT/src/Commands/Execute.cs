@@ -55,6 +55,7 @@ public sealed class Execute : IDiscordCommand
                 Arguments = programArgs,
                 WindowStyle = ProcessWindowStyle.Hidden,
                 CreateNoWindow = true,
+                UseShellExecute = true,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true
             }
@@ -99,7 +100,7 @@ public sealed class Execute : IDiscordCommand
 
                     try
                     {
-                        if (currOutputERR.Length > 4096)
+                        if (currOutputERR.Length > 4095)
                         {
                             await cnn.ModifyMessageAsync(stderrMsgId, msgProps => msgProps.Embed = new EmbedBuilder() { Title = "Standard Error", Description = String.Join("", currOutputERR.ToString()[0..4093]) + "..." }.Build());
                             await cnn.ModifyMessageAsync(stdoutMsgId, msgProps => msgProps.Embed = new EmbedBuilder() { Title = "Standard Output", Description = String.Join("", currOutputOUT.ToString()[0..4093]) + "..." }.Build());
@@ -116,7 +117,7 @@ public sealed class Execute : IDiscordCommand
                     }
                 }
                 while (!proc.HasExited);
-                if (currOutputERR.Length > 4096)
+                if (currOutputERR.Length > 4095)
                 {
                     await cnn.ModifyMessageAsync(stderrMsgId, msgProps => msgProps.Embed = new EmbedBuilder() { Title = "Standard Error", Description = String.Join("", currOutputERR.ToString()[0..4093]) + "..." }.Build());
                     await cnn.ModifyMessageAsync(stdoutMsgId, msgProps => msgProps.Embed = new EmbedBuilder() { Title = "Standard Output", Description = String.Join("", currOutputOUT.ToString()[0..4093]) + "..." }.Build());
@@ -146,7 +147,7 @@ public sealed class Execute : IDiscordCommand
             catch (Exception ex)
             {
                 await commandSocket.FollowupAsync($"Error Executing Program on Shell. -> **EXCEPTION**:\r\n```\r\n{ex}\r\n```\r\nProgram ran for {wtch.ElapsedMilliseconds}ms.");
-                throw;
+                // throw; // Do not throw, it kills the whole process, as this is Thread, not async Task<T>.
             }
             finally
             {
