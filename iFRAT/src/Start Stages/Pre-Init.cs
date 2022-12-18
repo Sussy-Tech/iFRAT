@@ -40,8 +40,8 @@ public sealed partial class StartStage
         Shared.HttpClient.Dispose();
 
         // Discord Client disposal
-        Shared.DiscordClient.LogoutAsync();
-        Shared.DiscordClient.StopAsync();
+        Shared.DiscordClient.LogoutAsync().Wait();
+        Shared.DiscordClient.StopAsync().Wait();
         Shared.DiscordClient.Dispose();
     }
 }
